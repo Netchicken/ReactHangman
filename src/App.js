@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import "./Keyboard.css";
+//import { allKeys } from './components/Tools';
+import Keyboard from "./components/Keyboard";
 
 function App() {
+  const [state, setState] = useState({
+    usedLetters: []
+  });
+
+  // => does the binding with the button
+
+  //https://reactjs.org/docs/faq-functions.html
+  const handleEvent = e => {
+    let key = e; //.target.value;
+    //alert("I was clicked ", key);
+    console.log("handleInput ", key);
+
+    setState(prevState => ({
+      //https://stackoverflow.com/questions/56328274/how-to-add-or-remove-an-item-from-state-array-in-react
+      usedLetters: [...prevState.usedLetters, key]
+    }));
+
+    console.log("usedLetters ", state.usedLetters);
+  };
+  let letter = "App.js";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>The Hangman App</h1>
+      <button onClick={() => handleEvent({ letter })}>{letter}</button>
+
+      <Keyboard handleEvent={handleEvent} usedLetters={state.usedLetters} />
     </div>
   );
 }
