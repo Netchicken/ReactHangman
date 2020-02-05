@@ -4,7 +4,7 @@ import "./Keyboard.css";
 import { randomWord } from "./components/Tools";
 import Keyboard from "./components/Keyboard";
 import Images from "./components/images";
-
+import WinLose from "./components/WinLose";
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +14,8 @@ export class App extends Component {
       word: "",
       blankArray: [],
       wordArray: [],
-      imageNumber: 0
+      imageNumber: "0",
+      winLose: false
     };
     this.handleEvent = this.handleEvent.bind(this);
   }
@@ -24,7 +25,7 @@ export class App extends Component {
   }
 
   startup() {
-        let tempWord = "";
+    let tempWord = "";
     let tempBlankWord = [];
 
     if (randomWord == null) {
@@ -41,9 +42,10 @@ export class App extends Component {
 
     this.setState(prevState => ({
       word: tempWord,
-      blankArray:  tempBlankWord,
+      blankArray: tempBlankWord,
       wordArray: Array.from(tempWord),
-      usedLetters: new Set() // this.state.usedLetters.add("-") //need this to give something to compare with in keyboard.js otherwise 'includes' error
+      usedLetters: new Set(), // this.state.usedLetters.add("-") //need this to give something to compare with in keyboard.js otherwise 'includes' error
+      imageNumber: "0"
     }));
   }
 
@@ -54,28 +56,41 @@ export class App extends Component {
     console.log("handleEvent  state.word ", this.state.word);
 
     // //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
-   
-    let tempBlankArray = this.state.blankArray; //make a temp to  save time in savestate
+
+    let tempBlankArray = this.state.blankArray;
     let tempWordArray = Array.from(this.state.word);
-    // console.log("1 tempBlankArray ", tempBlankArray);
+    let imageCount = this.state.imageNumber;
+    let tempWinLose = false;
+
     if (tempWordArray.includes(key)) {
       tempWordArray.forEach(letter => {
         //   console.log(" letter ", typeof(letter) + " " + letter);
         if (letter.toString() === key) {
           let number = tempWordArray.indexOf(key);
-            tempBlankArray.splice(number, 1, key);
+          tempWordArray.splice(number, 1, "-"); //need to get repeating letters
+          tempBlankArray.splice(number, 1, key);
           console.log("number ", number);
         }
       });
     } else {
       console.log("No match ", typeof key + " " + key);
+      imageCount++;
     }
-    console.log("2 tempBlankArray ", tempBlankArray);
-    console.log("tempWordArray ", tempWordArray);
+
+    if (!tempBlankArray.includes("-")) {
+      tempWinLose = true;
+      //make winlose visible
+    }
+
+    if (imageCount === 6) {
+      tempWinLose = false;
+    }
     //https://stackoverflow.com/questions/56328274/how-to-add-or-remove-an-item-from-state-array-in-react
     this.setState(prevState => ({
       blankArray: tempBlankArray,
-      usedLetters: this.state.usedLetters.add(key)
+      usedLetters: this.state.usedLetters.add(key),
+      imageNumber: imageCount,
+      winLose: tempWinLose
     }));
     console.log("usedLetters ", this.state.usedLetters);
     console.log("wordArray ", this.state.wordArray);
@@ -86,8 +101,8 @@ export class App extends Component {
     return (
       <div className="body">
         <h1>The Hangman App</h1>
-        <Images number ={this.state.imageNumber}/>
-
+        <Images number={this.state.imageNumber} />
+        <WinLose bln={this.state.winLose} />
         <h2> {this.state.blankArray.join(" ")} </h2>
 
         <button className="btn btn- " onClick={() => this.startup()}>
