@@ -3,6 +3,7 @@ import "./App.css";
 import "./Keyboard.css";
 import { randomWord } from "./components/Tools";
 import Keyboard from "./components/Keyboard";
+import Images from "./components/images";
 
 export class App extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export class App extends Component {
       usedLetters: new Set(), //set can only have unique values
       word: "",
       blankArray: [],
-      wordArray: []
+      wordArray: [],
+      imageNumber: 0
     };
     this.handleEvent = this.handleEvent.bind(this);
   }
@@ -84,6 +86,7 @@ export class App extends Component {
     return (
       <div className="body">
         <h1>The Hangman App</h1>
+        <Images number ={this.state.imageNumber}/>
 
         <h2> {this.state.blankArray.join(" ")} </h2>
 
