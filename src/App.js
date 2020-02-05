@@ -9,22 +9,24 @@ export class App extends Component {
   constructor(props) {
     super(props);
     //make items array to hold staff initialized as empty
-    this.state = {
-      usedLetters: new Set(), //set can only have unique values
-      word: "",
-      blankArray: [],
-      wordArray: [],
-      imageNumber: "0",
-      winLose: false
-    };
+    this.state = this.initialState;
     this.handleEvent = this.handleEvent.bind(this);
   }
-
+  //Use initialState so yu can reset it for a new game
+  initialState = {
+    usedLetters: new Set(), //set can only have unique values
+    word: "",
+    blankArray: [],
+    wordArray: [],
+    imageNumber: "0",
+    winLoseText: "hide"
+  };
   componentDidMount() {
     this.startup();
   }
 
   startup() {
+    this.setState(this.initialState); //reset state
     let tempWord = "";
     let tempBlankWord = [];
 
@@ -44,7 +46,7 @@ export class App extends Component {
       word: tempWord,
       blankArray: tempBlankWord,
       wordArray: Array.from(tempWord),
-      usedLetters: new Set(), // this.state.usedLetters.add("-") //need this to give something to compare with in keyboard.js otherwise 'includes' error
+      //  usedLetters: new Set(), // this.state.usedLetters.add("-") //need this to give something to compare with in keyboard.js otherwise 'includes' error
       imageNumber: "0"
     }));
   }
@@ -60,11 +62,10 @@ export class App extends Component {
     let tempBlankArray = this.state.blankArray;
     let tempWordArray = Array.from(this.state.word);
     let imageCount = this.state.imageNumber;
-    let tempWinLose = false;
+    let tempWinLose = "hide";
 
     if (tempWordArray.includes(key)) {
       tempWordArray.forEach(letter => {
-        //   console.log(" letter ", typeof(letter) + " " + letter);
         if (letter.toString() === key) {
           let number = tempWordArray.indexOf(key);
           tempWordArray.splice(number, 1, "-"); //need to get repeating letters
@@ -73,24 +74,27 @@ export class App extends Component {
         }
       });
     } else {
-      console.log("No match ", typeof key + " " + key);
+      //   console.log("No match ", typeof key + " " + key);
       imageCount++;
     }
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+    const isNotBlank = currentValue => currentValue !== "_";
 
-    if (!tempBlankArray.includes("-")) {
-      tempWinLose = true;
-      //make winlose visible
+    if (tempBlankArray.every(isNotBlank)) {
+      tempWinLose = "win";
     }
 
     if (imageCount === 6) {
-      tempWinLose = false;
+      tempWinLose = "lose";
     }
+
+    console.log("tempWinLose ", tempWinLose);
     //https://stackoverflow.com/questions/56328274/how-to-add-or-remove-an-item-from-state-array-in-react
     this.setState(prevState => ({
       blankArray: tempBlankArray,
       usedLetters: this.state.usedLetters.add(key),
       imageNumber: imageCount,
-      winLose: tempWinLose
+      winLoseText: tempWinLose
     }));
     console.log("usedLetters ", this.state.usedLetters);
     console.log("wordArray ", this.state.wordArray);
@@ -99,19 +103,29 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="body">
-        <h1>The Hangman App</h1>
-        <Images number={this.state.imageNumber} />
-        <WinLose bln={this.state.winLose} />
-        <h2> {this.state.blankArray.join(" ")} </h2>
+      <div className="body container">
+        <div className={"columnContainer"}>
+          <div className={"leftContainer"}>
+            <Images number={this.state.imageNumber} />
+            <div className={"winLose"}>
+              <WinLose outcome={this.state.winLoseText} />
+            </div>
+          </div>
+          <div className={"middleContainer"}>
+            <h1>Hangman</h1>
+            <h2> {this.state.blankArray.join(" ")} </h2>
 
-        <button className="btn btn- " onClick={() => this.startup()}>
-          Play a new Game
-        </button>
-        <Keyboard
-          handleEvent={this.handleEvent}
-          usedLetters={this.state.usedLetters}
-        />
+            <button className="btn btn- " onClick={() => this.startup()}>
+              Play a new Game
+            </button>
+          </div>
+          <div className={"rightContainer"}>
+            <Keyboard
+              handleEvent={this.handleEvent}
+              usedLetters={this.state.usedLetters}
+            />
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,32 +1,75 @@
+/* https://jsfiddle.net/buckydroid/k31quu5w/ */
 
 body {
   font-family: "montserrat", sans-serif;
-  background-color: #223343;
-      text-align: center;
+  background-color: #adc9e4;
+  text-align: center;
+  height: 100% !important;
 }
- h1 {
+
+.container {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+.columnContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+   height: 100%; 
+  height: calc(100vh - 60px);
+}
+
+.leftContainer {
+  height: 100%; 
+  flex: 0 1 auto;
+  margin: 10px;
+  /* background-color: black; */
+}
+
+.rightContainer {
+  flex: 0 1 auto;
+  /* height: 800px; */
+  margin: 10px;
+  /* background-color: black; */
+}
+
+.middleContainer {
+  flex: 0 1 auto;
+  /* height: 800px; */
+  margin: 10px;
+  /* background-color: black; */
+}
+
+h1 {
   color: #fff;
   font-size: 48px;
   font-weight: 500;
   text-align: center;
 }
- h3 {
+h2 h3 {
   color: #fff;
   font-size: 40px;
   font-weight: 200;
   text-align: center;
 }
 
+h4 {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 200;
+  text-align: center;
+}
 
 .keyboard-container {
   padding: 5px;
   width: 300px;
   border-radius: 10px;
-  background: #447530;
+  background: #d4e4ce;
   border-color: rgb(235, 214, 214);
   margin: 0 auto;
-  
-  
 }
 .keyboard-container li:last-child {
   margin-right: 0px;
@@ -39,23 +82,13 @@ body {
   font-size: 1.8vw;
   background-size: stretch;
   border-radius: 10px;
-  
 }
-/* .keyboard-container ul li button:hover,
-.keyboard-container ul li button:visited,
-.keyboard-container ul li button:active,
-.keyboard-container ul li button:focus {
-  text-decoration: none;
-}
-.keyboard-container li button.enter-key {
-  padding: 0px 40px;
-} */
+
 .keyboard-container ul {
   display: flex;
   flex-wrap: wrap;
   padding: 0px;
   margin: 5px;
-  
 }
 .keyboard-container ul li {
   flex-basis: 100%;
@@ -71,25 +104,14 @@ body {
 }
 
 .keyboard-container li button {
-  background: #333036;
-  color: #deedf1;
+  background: #d8d8c8;
+  color: #236e83;
   border-color: rgb(235, 214, 214);
 }
-/* .keyboard-container .shift-activated {
-  background: #117967 !important;
+.winLose {
+  color: rgb(33, 233, 15);
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
-.keyboard-container .enter-key {
-  background: #969597 !important;
-}
-.keyboard-container .back-key {
-  background: #969597 !important;
-}
-.keyboard-container .clear-key {
-  background: #969597 !important;
-}
-.keyboard-container .space-key {
-  background: #969597 !important;
-}
-.keyboard-container .shift {
-  background: #969597 !important;
-} */

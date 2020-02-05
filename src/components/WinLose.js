@@ -1,11 +1,17 @@
 //rafc
 import React from "react";
 
-const WinLose = bln => {
+const WinLose = outcome => {
   return (
-    <div>
-      <h2> {bln ? "You Win" : "You Lose"}</h2>
-    </div>
+    <h2>
+      {outcome === "hide"
+        ? "Playing ..."
+        : outcome === "win"
+        ? "You Win"
+        : outcome === "lose"
+        ? "You Lose"
+        : "FallBack"}
+    </h2>
   );
 };
 export default WinLose;
