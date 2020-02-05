@@ -1,3 +1,12 @@
+const words = ["fish", "cat", "walrus", "cabbage"];
+//create a random number
+let generateNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+//get the random word
+export const randomWord = words[generateNumber(0, words.length)];
+//export const randomWordLength = randomWord.length;
+
 export const allKeys = [
   "a",
   "b",

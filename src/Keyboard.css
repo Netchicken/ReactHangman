@@ -1,9 +1,32 @@
+
+body {
+  font-family: "montserrat", sans-serif;
+  background-color: #223343;
+      text-align: center;
+}
+ h1 {
+  color: #fff;
+  font-size: 48px;
+  font-weight: 500;
+  text-align: center;
+}
+ h3 {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 200;
+  text-align: center;
+}
+
+
 .keyboard-container {
   padding: 5px;
   width: 300px;
   border-radius: 10px;
+  background: #447530;
+  border-color: rgb(235, 214, 214);
+  margin: 0 auto;
   
-
+  
 }
 .keyboard-container li:last-child {
   margin-right: 0px;
@@ -14,11 +37,11 @@
   display: flow-root;
   position: center;
   font-size: 1.8vw;
-  background-size: strech;
+  background-size: stretch;
   border-radius: 10px;
   
 }
-.keyboard-container ul li button:hover,
+/* .keyboard-container ul li button:hover,
 .keyboard-container ul li button:visited,
 .keyboard-container ul li button:active,
 .keyboard-container ul li button:focus {
@@ -26,7 +49,7 @@
 }
 .keyboard-container li button.enter-key {
   padding: 0px 40px;
-}
+} */
 .keyboard-container ul {
   display: flex;
   flex-wrap: wrap;
@@ -36,9 +59,10 @@
 }
 .keyboard-container ul li {
   flex-basis: 100%;
-  height: 30px;
+  height: 40px;
+  width: 40px;
   font-size: 1.5vw;
-  margin: 0 0.3vh 0.5vh;
+  margin: 5px;
   line-height: 60px;
   font-family: arial;
   text-align: center;
@@ -46,17 +70,12 @@
   list-style: none;
 }
 
-/* color - for theming purpose */
-
-.keyboard-container {
-  background: #6cb7df;
-}
 .keyboard-container li button {
   background: #333036;
   color: #deedf1;
   border-color: rgb(235, 214, 214);
 }
-.keyboard-container .shift-activated {
+/* .keyboard-container .shift-activated {
   background: #117967 !important;
 }
 .keyboard-container .enter-key {
@@ -73,4 +92,4 @@
 }
 .keyboard-container .shift {
   background: #969597 !important;
-}
+} */

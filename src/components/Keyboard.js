@@ -10,9 +10,10 @@ const Keyboard = ({ handleEvent, usedLetters }) => {
       {/* <button onClick={() => handleEvent("Keyboard")}>Keyboard</button> */}
       <ul>
         {allKeys.map(key =>
-          usedLetters.includes(key) ? ( //if the letter has been used and is in the array
+          usedLetters.has(key) ? ( //if the letter has been used and is in the array
             <Keys
               letter={"-"}
+              key={KeyIndex++}
               Index={KeyIndex++}
               handleEvent={handleEvent}
               disabled={true}
@@ -20,6 +21,7 @@ const Keyboard = ({ handleEvent, usedLetters }) => {
           ) : (
             <Keys
               letter={key.toString()}
+              key={KeyIndex++}
               Index={KeyIndex++}
               handleEvent={handleEvent}
               disabled={false}
