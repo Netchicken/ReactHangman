@@ -12,7 +12,7 @@ export class App extends Component {
     this.state = this.initialState;
     this.handleEvent = this.handleEvent.bind(this);
   }
-  //Use initialState so yu can reset it for a new game
+  //Use initialState so you can reset it for a new game
   initialState = {
     usedLetters: new Set(), //set can only have unique values
     word: "",
@@ -29,7 +29,7 @@ export class App extends Component {
     this.setState(this.initialState); //reset state
     let tempWord = "";
     let tempBlankWord = [];
-
+    this.state.usedLetters.clear(); //empty the set
     if (randomWord == null) {
       tempWord = "notworking";
     } else {
