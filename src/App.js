@@ -6,6 +6,7 @@ import Keyboard from "./components/Keyboard";
 import Images from "./components/images";
 import WinLose from "./components/WinLose";
 import { TurnOperation } from "./components/GameProcessing";
+import WinLoseImages from "./components/WinLoseImages";
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -154,6 +155,7 @@ export class App extends Component {
             />
           </div>
         </div>
+        <WinLoseImages outcome={this.state.winLoseText} />
       </div>
     );
   }

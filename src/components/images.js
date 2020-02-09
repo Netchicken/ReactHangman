@@ -11,7 +11,7 @@ import H7 from "./images/Hanged6.png";
 const picArray = ["",H1, H2, H3, H4, H5, H6, H7];
 
 const images = ({ number }) => {
-  console.log("image name", picArray[number] + " " + number);
+ // console.log("image name", picArray[number] + " " + number);
   return (
   <>
     { number === 0 ? "" :

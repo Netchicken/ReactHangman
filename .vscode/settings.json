@@ -3,5 +3,9 @@
         "[One Dark Pro Bold]": {
             "editor.background": "#070505"
         }
-    }
+    },
+    "editor.tabSize": 2,
+    "editor.wordWrapColumn": 150,
+    "editor.wrappingStrategy": "advanced",
+    "editor.wordWrap": "on"
 }
