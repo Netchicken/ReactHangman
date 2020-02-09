@@ -5,7 +5,7 @@ const WinLose = ({ outcome }) => {
  // const result = outcome.toString();
   //console.log("result  ", result);
   return (
-    <h2>
+    <span className="winLoseText">
       {outcome === "hide"
         ? "Playing ..."
         : outcome === "win"
@@ -13,7 +13,7 @@ const WinLose = ({ outcome }) => {
         : outcome === "lose"
         ? "You Lose"
         : "FallBack"}
-    </h2>
+    </span>
   );
 };
 export default WinLose;

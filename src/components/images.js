@@ -16,7 +16,7 @@ const images = ({ number }) => {
   <>
     { number === 0 ? "" :
    
-      <img height="100" width="80" src={picArray[number]} alt="hangman" />
+      <img height="150" width="120" src={picArray[number]} alt="hangman" />
       }
 </>)
         

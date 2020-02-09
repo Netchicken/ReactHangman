@@ -1,17 +1,70 @@
 /* https://jsfiddle.net/buckydroid/k31quu5w/ */
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+
+/* We rely on source order for mobile-first approach
+ * in this case:
+ * 1. header
+ * 2. article
+ * 3. aside 1
+ * 4. aside 2
+ * 5. footer
+ */
+
+ 
 
 body {
   font-family: "montserrat", sans-serif;
   background-color: #adc9e4;
-  text-align: center;
-  height: 100% !important;
+   text-align: center;
+  /* height: 100% !important; */
 }
 
 .container {
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
+  display: flex;  
+  flex-flow: row wrap;
+   font-weight: bold;
+  text-align: center; 
 }
+/* We tell all items to be 100% width, via flex-basis */
+.container > * {
+   padding: 10px; 
+  flex: 1 100%;
+}
+
+.header {
+  /* background: tomato; */
+}
+
+.footer {
+  /* background: lightgreen; */
+}
+
+.main {
+  /* text-align: left; */
+  /* background: deepskyblue; */
+}
+
+.aside-1 {
+  /* background: gold; */
+}
+
+.aside-2 {
+  /* background: hotpink; */
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1  auto; }
+}
+
+@media all and (min-width: 800px) {
+  .main    { flex: 2 0px; }
+  .aside-1 { order: 1; } 
+  .main    { order: 2; }
+  .aside-2 { order: 3; }
+  .footer  { order: 4; }
+}
+
+/*
 .columnContainer {
   display: flex;
   flex-direction: row;
@@ -26,22 +79,25 @@ body {
   height: 100%; 
   flex: 0 1 auto;
   margin: 10px;
-  
-}
+  }
 
 .rightContainer {
   flex: 0 1 auto;
-  /* height: 800px; */
+ height: 800px; 
   margin: 10px;
- 
-}
+ }
 
 .middleContainer {
   flex: 0 1 auto;
-  /* height: 800px; */
+  height: 800px; 
   margin: 10px;
+  }
+.bottomContainer {
+  flex: 0 1 auto;
   
-}
+  margin: 10px;
+  }
+*/
 
 h1 {
   color: #fff;
@@ -55,6 +111,8 @@ h2 h3 {
   font-weight: 200;
   text-align: center;
 }
+
+
 
 h4 {
   color: #fff;
@@ -117,9 +175,17 @@ h4 {
 }
 .winLoseImage{
 border-radius: 8px;
+margin-top: -20px;
 max-width: 100%;
   height: auto;
    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
   padding: 10px;
   background: white;
+}
+.winLoseText{
+color: #fff;
+  font-size: 40px;
+  font-weight: 200;
+  text-align: center;
+
 }

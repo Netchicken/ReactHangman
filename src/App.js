@@ -132,30 +132,36 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="body container">
-        <div className={"columnContainer"}>
-          <div className={"leftContainer"}>
+      <div className="container">
+        <header className={"header"}>
+          <h1>Hangman</h1>
+        </header>
+       
+        <div className={"main"}>
+          <span className={"winLose"}>
+            <WinLose outcome={this.state.winLoseText} />
             <Images number={this.state.imageNumber} />
-            <div className={"winLose"}>
-              <WinLose outcome={this.state.winLoseText} />
-            </div>
-          </div>
-          <div className={"middleContainer"}>
-            <h1>Hangman</h1>
-            <h2> {this.state.blankArray.join(" ")} </h2>
-
-            <button className="btn btn- " onClick={() => this.startup()}>
-              Play a new Game
-            </button>
-          </div>
-          <div className={"rightContainer"}>
-            <Keyboard
-              handleEvent={this.handleEvent}
-              usedLetters={this.state.usedLetters}
-            />
-          </div>
+          </span>
         </div>
-        <WinLoseImages outcome={this.state.winLoseText} />
+
+        <div className={" aside aside-1"}>
+          <h2> {this.state.blankArray.join(" ")} </h2>
+
+          <button className="btn btn- " onClick={() => this.startup()}>
+            Play a new Game
+          </button>
+          <Keyboard
+            handleEvent={this.handleEvent}
+            usedLetters={this.state.usedLetters}
+          />
+        </div>
+        <div className={"aside aside-2"}>
+         <WinLoseImages outcome={this.state.winLoseText} />
+        </div>
+        <footer class="footer">
+          
+        </footer>
+       
       </div>
     );
   }
