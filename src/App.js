@@ -5,6 +5,7 @@ import { randomWord } from "./components/Tools";
 import Keyboard from "./components/Keyboard";
 import Images from "./components/images";
 import WinLose from "./components/WinLose";
+import { TurnOperation } from "./components/GameProcessing";
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ export class App extends Component {
     word: "",
     blankArray: [],
     wordArray: [],
-    imageNumber: "0",
+    imageNumber: 1, //..no start number not an image
     winLoseText: "hide"
   };
   componentDidMount() {
@@ -28,7 +29,7 @@ export class App extends Component {
   startup() {
     this.setState(this.initialState); //reset state
     let tempWord = "";
-    let tempBlankWord = [];
+    let tempBlankWordArray = [];
     this.state.usedLetters.clear(); //empty the set
     if (randomWord == null) {
       tempWord = "notworking";
@@ -38,26 +39,53 @@ export class App extends Component {
     console.log("randomWord", tempWord);
 
     for (let index = 0; index < tempWord.length; index++) {
-      tempBlankWord.push("_");
+      tempBlankWordArray.push("_");
     }
-    console.log("startup tempBlankWord", tempBlankWord);
+    console.log("startup tempBlankWordArray", tempBlankWordArray);
 
     this.setState(prevState => ({
       word: tempWord,
-      blankArray: tempBlankWord,
+      blankArray: tempBlankWordArray,
       wordArray: Array.from(tempWord),
-      //  usedLetters: new Set(), // this.state.usedLetters.add("-") //need this to give something to compare with in keyboard.js otherwise 'includes' error
-      imageNumber: "0"
+      imageNumber: 0
     }));
+  }
+
+  async handleEventModule(e) {
+    let key = e.toString();
+
+    let returnArray = TurnOperation(key, this.state);
+
+    await this.updateStateBeforeLoading(key, returnArray);
+    // let newStateObj = newStateMap;// Object.fromEntries(newStateMap); // make a plain object (*)
+  }
+  updateStateBeforeLoading(key, returnArray) {
+    this.setState = prevState => ({
+      ...prevState,
+      blankArray: returnArray.blankArray,
+      ...prevState,
+      usedLetters: this.state.usedLetters.add(key),
+      ...prevState,
+      imageNumber: returnArray.imageCount,
+      ...prevState,
+      winLoseText: returnArray.winLoseText
+    });
+
+    console.log("usedLetters ", this.state.usedLetters);
+    console.log("imageNumber ", this.state.imageNumber);
+    console.log("blankArray ", this.state.blankArray);
   }
 
   handleEvent(e) {
     let key = e.toString();
-    console.log("handleInput ", key);
+    console.log("handleEvent blankArray ", this.state.blankArray);
     console.log("handleEvent  state.wordArray ", this.state.wordArray);
     console.log("handleEvent  state.word ", this.state.word);
-
-    // //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
+    console.log("handleEvent  state.usedLetters ", this.state.usedLetters);
+    console.log("handleEvent  state.imageNumber ", this.state.imageNumber);
+    console.log("handleEvent  state.winLoseText ", this.state.winLoseText);
+    // }
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
 
     let tempBlankArray = this.state.blankArray;
     let tempWordArray = Array.from(this.state.word);
@@ -79,12 +107,12 @@ export class App extends Component {
     }
     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
     const isNotBlank = currentValue => currentValue !== "_";
-
+    //no more underscores, you win
     if (tempBlankArray.every(isNotBlank)) {
       tempWinLose = "win";
     }
-
-    if (imageCount === 6) {
+    //no more images, you lose
+    if (imageCount === 7) {
       tempWinLose = "lose";
     }
 
