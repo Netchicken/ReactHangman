@@ -1,6 +1,5 @@
 //rafc
 import React from "react";
-import L3 from "./winLoseImages/lose3.png";
 import { randomWinImage, randomLoseImage } from "./Tools";
 import "./Keyboard";
 
@@ -13,9 +12,9 @@ const WinLoseImages = ({ outcome }) => {
   return (
     <>
       {outcome === "win" ? (
-        <img src={randomWinImage} alt="hangman" />
+        <img className={"winLoseImage"} src={randomWinImage()} alt="hangman" />
       ) : outcome === "lose" ? (
-        <img className={"winLoseImage"} src={randomLoseImage} alt="hangman" />
+        <img className={"winLoseImage"} src={randomLoseImage()} alt="hangman" />
       ) : (
         "  "
       )}

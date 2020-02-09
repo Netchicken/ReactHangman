@@ -35,7 +35,7 @@ export class App extends Component {
     if (randomWord == null) {
       tempWord = "notworking";
     } else {
-      tempWord = randomWord.toLowerCase();
+      tempWord = randomWord().toLowerCase();
     }
     console.log("randomWord", tempWord);
 
