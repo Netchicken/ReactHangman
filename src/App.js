@@ -133,10 +133,12 @@ export class App extends Component {
   render() {
     return (
       <div className="container">
-        <header className={"header"}>
-          <h1>Hangman</h1>
+        <header className="header">
+          <div className="title">
+            <h1>Simple Hangman</h1>
+          </div>
         </header>
-       
+
         <div className={"main"}>
           <span className={"winLose"}>
             <WinLose outcome={this.state.winLoseText} />
@@ -145,9 +147,9 @@ export class App extends Component {
         </div>
 
         <div className={" aside aside-1"}>
-          <h2> {this.state.blankArray.join(" ")} </h2>
+          <h2 className="guessLetters"> {this.state.blankArray.join(" ")} </h2>
 
-          <button className="btn btn- " onClick={() => this.startup()}>
+          <button className="playButton " onClick={() => this.startup()}>
             Play a new Game
           </button>
           <Keyboard
@@ -156,12 +158,9 @@ export class App extends Component {
           />
         </div>
         <div className={"aside aside-2"}>
-         <WinLoseImages outcome={this.state.winLoseText} />
+          <WinLoseImages outcome={this.state.winLoseText} />
         </div>
-        <footer class="footer">
-          
-        </footer>
-       
+        <footer class="footer"></footer>
       </div>
     );
   }
