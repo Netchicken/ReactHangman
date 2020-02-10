@@ -115,7 +115,7 @@ export class App extends Component {
     //no more images, you lose
     if (imageCount === 7) {
       tempWinLose = "lose";
-
+      tempBlankArray = Array.from(this.state.word);
       //todo show word when you lose.
     }
 
@@ -143,7 +143,7 @@ export class App extends Component {
 
         <div className={"main"}>
           <span className={"winLose"}>
-            <WinLose outcome={this.state.winLoseText} word ={ this.state.word} />
+            <WinLose outcome={this.state.winLoseText} word={this.state.word} />
             <Images number={this.state.imageNumber} />
           </span>
         </div>
